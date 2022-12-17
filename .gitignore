@@ -13,4 +13,4 @@
 tmp/*
 !twitter_api.py
 !twitter_stream_answers.py
-!twitterbot
+!twitterbot.py
