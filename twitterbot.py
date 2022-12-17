@@ -40,16 +40,25 @@ if __name__ == "__main__":
             first_tweet_id = start_bot(default)
     else:
         if input('Start Twitter bot? (y/n) ') in ['yes', 'y']:
-            first_tweet_id = start_bot(default=False)
+            conf  = config.get_config()
+            if 'first_tweet_id' in conf:
+                first_tweet_id = conf['first_tweet_id']
+                print(f'Use this tweet as instructions? https://twitter.com/{conf["bot_username"]}/status/{first_tweet_id}')
+                print('y/n')
+                if input('>>> ').lower() != 'y':   
+                    start_bot(default=False)
+            else:
+                first_tweet_id = start_bot(default=False)
         else:
             print('Exiting...')
     
     conf = config.get_config()
+    
     print(f'You have posted your first tweet: https://twitter.com/{conf["bot_username"]}/status/{first_tweet_id}')
 
     # Start monitoring answers to the first tweet.    
     subprocess.Popen(['python', 'stream_answers.py', first_tweet_id], cwd=os.path.dirname(os.path.realpath(__file__)))
-    
+
     # Start the answering machine.
     subprocess.run(['python', 'answering_machine.py'], cwd=os.path.dirname(os.path.realpath(__file__)))
 
