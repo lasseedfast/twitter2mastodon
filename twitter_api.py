@@ -99,5 +99,5 @@ class API:
 
     def reply_with_url(self, tweet_id, url, username):
        
-        params = {"reply": {"in_reply_to_tweet_id": str(tweet_id)}, "text": f"Hi {username}! Download a list of Mastodon users that you are following on Twitter: {url}"}
+        params = {"reply": {"in_reply_to_tweet_id": str(tweet_id)}, "text": f"Hi {username}! Download a list of Mastodon users that you are following on Twitter: {url} Take that csv-file and import in Mastodon (Settings > Import)."}
         self.post_tweet(params=params)
