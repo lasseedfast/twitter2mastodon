@@ -8,9 +8,7 @@
 !Makefile
 !README.md
 !requirements.txt
-!sql_api.py.py
-!/tmp/
-/tmp/*
+!sql_api.py
 !twitter_api.py
 !twitter_stream_answers.py
 !twitterbot.py
