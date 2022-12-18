@@ -9,8 +9,8 @@
 !README.md
 !requirements.txt
 !sql_api.py.py
-!/tmp
-/tmp/*
+!tmp/
+tmp/*
 !twitter_api.py
 !twitter_stream_answers.py
 !twitterbot.py
