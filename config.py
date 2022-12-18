@@ -62,7 +62,10 @@ def get_config(check_for=False):
     # Returns a config file, creating one if not existing.
     if os.path.exists("config.json"):
         with open("config.json") as f:
-            config = json.load(f)
+            try:
+                config = json.load(f)
+            except json.decoder.JSONDecodeError:
+                config = create_config()
             if check_for:
                 for i in check_for:
                     if i not in config:
