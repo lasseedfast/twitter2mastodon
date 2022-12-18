@@ -39,7 +39,7 @@ def get_followings(username):
             try:
                 error_title = result['errors'][0]['title']
                 if error_title == 'Authorization Error':
-                    return ['Private Profile']
+                    return 'private'
             except:
                 break
         if 'data' not in result:
