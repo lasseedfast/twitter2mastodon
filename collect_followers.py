@@ -35,6 +35,13 @@ def get_followings(username):
             f"https://api.twitter.com/2/users/{id}/following", 
             params = {'pagination_token': pagination_token, "max_results": 1000, 'user.fields': 'description'}
             )
+        if 'errors' in result:
+            try:
+                error_title = result['errors'][0]['title']
+                if error_title == 'Authorization Error':
+                    return ['Private Profile']
+            except:
+                break
         if 'data' not in result:
             break
         # Append data to list json_response_list.
@@ -52,7 +59,7 @@ def update_db(followings):
     """ Update Mastodon username DB. Returns the followings who has a Mastodon hansle in their bio. """
     # Create SQL-query.
     l = []
-    tweeters_with_mastodon = ['lasseedfast']
+    tweeters_with_mastodon = []
     for i in followings:
         m_username = extract_mastodon_handle(i["description"].replace('"', "'")) # Can't be double quotes when sending to SQL.
         if m_username:

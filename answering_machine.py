@@ -12,6 +12,8 @@ def main(tweet):
 
     t_username = tweet["t_username"]
     followings = collect_followers.get_followings(t_username)
+    if followings == 'private':
+        twitter_api.reply_to_private(tweet["tweet_id"], t_username)
     followings = collect_followers.update_db(followings)
 
     filename = collect_followers.export_followings(followings, t_username)
