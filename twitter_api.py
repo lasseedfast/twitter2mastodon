@@ -101,3 +101,8 @@ class API:
        
         params = {"reply": {"in_reply_to_tweet_id": str(tweet_id)}, "text": f"Hi {username}! Download a list of Mastodon users that you are following on Twitter: {url} Take that csv-file and import in Mastodon (Settings > Import)."}
         self.post_tweet(params=params)
+
+    def reply_to_private(self, tweet_id, username):
+       """ Reply to private profiles. """
+       params = {"reply": {"in_reply_to_tweet_id": str(tweet_id)}, "text": f"Hi {username}! Because you have a private I can't see what profiles you are following."}
+       self.post_tweet(params=params)
