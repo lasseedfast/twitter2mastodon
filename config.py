@@ -17,7 +17,11 @@ def create_config():
             config['twitter_access_token_secret'] = input('Twitter access token secret')
 
             config['dropbox_app_key'] = input('Dropbox app key:')
-            oauth_result = get_dropbox_tokens(config['dropbox_app_key'])
+            
+            if input('Do you have refresh token? (y/n)') not in ['y', 'yes']:
+                # Login to Dropbox using a webbrowser to get refresh token.
+                oauth_result = get_dropbox_tokens(config['dropbox_app_key'])
+
             config['dropbox_refresh_token'] = oauth_result.refresh_token
             config['dropboc_access_token'] = oauth_result.access_token
             config['dropbox_app_secret'] = input('Dropbox app secret:')
