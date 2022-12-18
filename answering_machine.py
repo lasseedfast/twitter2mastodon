@@ -13,17 +13,19 @@ def main(tweet):
     t_username = tweet["t_username"]
     followings = collect_followers.get_followings(t_username)
     if followings == 'private':
-        twitter_api.reply_to_private(tweet["tweet_id"], t_username)
-    followings = collect_followers.update_db(followings)
+        twitter.reply_to_private(tweet["tweet_id"], t_username)
+    
+    else:
+        followings = collect_followers.update_db(followings)
 
-    filename = collect_followers.export_followings(followings, t_username)
+        filename = collect_followers.export_followings(followings, t_username)
 
-    # Share to dropbox
-    dropbox = dropbox_api.API()
-    shared_file_url = dropbox.upload_file(filename)
+        # Share to dropbox
+        dropbox = dropbox_api.API()
+        shared_file_url = dropbox.upload_file(filename)
 
-    # Reply to tweet with url.
-    twitter.reply_with_url(tweet["tweet_id"], shared_file_url, t_username)
+        # Reply to tweet with url.
+        twitter.reply_with_url(tweet["tweet_id"], shared_file_url, t_username)
 
     sql = f'DELETE FROM queue WHERE t_username == "{t_username}"'
     db.commit(sql)
