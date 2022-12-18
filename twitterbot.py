@@ -32,6 +32,14 @@ def start_bot(default=True):
 
 if __name__ == "__main__":
 
+    # Change working directory to the scripts' directory.
+    os.chdir(os.path.dirname(os.path.realpath(__file__)))
+
+    # Create the tmp folder if it does not exists.
+    path_tmp = os.path.dirname(os.path.realpath(__file__)) + '/tmp'
+    if not os.path.exists(path_tmp):
+        os.mkdir(path_tmp)
+
     conf = config.get_config(check_for=['dropbox_refresh_token', 'twitter_access_token_secret'])
 
     if len(sys.argv) > 1:
