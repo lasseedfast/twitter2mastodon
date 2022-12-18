@@ -31,6 +31,9 @@ def start_bot(default=True):
     return first_tweet_id
 
 if __name__ == "__main__":
+
+    conf = config.get_config()
+
     if len(sys.argv) > 1:
         if sys.argv[1].lower() == 'start':
             if sys.argv[1].lower() == 'default':
@@ -53,7 +56,7 @@ if __name__ == "__main__":
             print('Exiting...')
     
     conf = config.get_config()
-    
+
     print(f'You have posted your first tweet: https://twitter.com/{conf["bot_username"]}/status/{first_tweet_id}')
 
     # Start monitoring answers to the first tweet.    
