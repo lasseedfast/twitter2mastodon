@@ -32,7 +32,7 @@ def start_bot(default=True):
 
 if __name__ == "__main__":
 
-    conf = config.get_config()
+    conf = config.get_config(check_for=['dropbox_refresh_token', 'twitter_access_token_secret'])
 
     if len(sys.argv) > 1:
         if sys.argv[1].lower() == 'start':
@@ -53,7 +53,8 @@ if __name__ == "__main__":
             else:
                 first_tweet_id = start_bot(default=False)
         else:
-            print('Exiting...')
+            print('\nExiting...\n')
+            exit()
     
     conf = config.get_config()
 

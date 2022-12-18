@@ -58,11 +58,15 @@ def update_config(key, value):
     return config
 
 
-def get_config():
+def get_config(check_for=False):
     # Returns a config file, creating one if not existing.
     if os.path.exists("config.json"):
         with open("config.json") as f:
             config = json.load(f)
+            if check_for:
+                for i in check_for:
+                    if i not in config:
+                        config = create_config()
     else:
         config = create_config()
     return config
